@@ -17,8 +17,7 @@ class DAG:
     dictionary = { i : array }
 
 dag = DAG()
-xArray = []
-yArray = []
+xyArray = []
 dataArray = []
 
 def addEdge(x, y, i, data):
@@ -34,37 +33,33 @@ def addEdge(x, y, i, data):
     dag.i = dag.i + 1 
 
 def rng():
-    a = 1
-    b = 200#max range must be > or = to loadDAG limit
-    return random.randint(a, b)
+    maxRange = 4
+    return random.randint(1, maxRange)
 
-def checkDirection(data, kind):
+def checkDirection(dataX, dataY):
     k = 0
     while k < 1:
-        if kind == 'x':
-            if data in xArray:
-                data = rng()
-            else:
-                break
-        elif kind == 'y':
-            if data in yArray:
-                data = rng()
-            else:
-                break
-    return data
+        location = [dataX, dataY]
+        if location in xyArray:
+            dataX = rng()
+            dataY = rng()
+        else:
+            break
+    return dataX, dataY
 
 def loadDAG(limit):
     for i in range(limit):
-        newX = checkDirection(rng(), 'x')
-        newY = checkDirection(rng(), 'y')
+        newX = rng()
+        newY = rng()
+        newX, newY = checkDirection(newX, newY)
         newData = rng()
-        xArray.append(newX)
-        yArray.append(newY)
+        location = [newX, newY]
+        xyArray.append(location)
         dataArray.append(newData)
         addEdge(newX, newY, dag.i,  newData)
         print(dag.dictionary)
         
-loadDAG(199)#loadDAG limit must be < or = max rng
+loadDAG(16) # load limit can be 4x the max range of the rng
 
 
 
