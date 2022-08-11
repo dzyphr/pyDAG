@@ -29,7 +29,7 @@ def addEdge(x, y, i, data):
     dag.data = data
     new_edge = [x, y, data]
     dag.array = new_edge
-    dag.dictionary = { dag.i : dag.array }
+    dag.dictionary[i] = dag.array 
     dag.i = dag.i + 1 
 
 def rng():
@@ -57,7 +57,7 @@ def loadDAG(limit):
         xyArray.append(location)
         dataArray.append(newData)
         addEdge(newX, newY, dag.i,  newData)
-        print(dag.dictionary)
+        print(dag.dictionary[i])
         
 loadDAG(16) # load limit can be 4x the max range of the rng
 
