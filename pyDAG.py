@@ -35,7 +35,7 @@ def addEdge(x, y, i, data):
 
 def rng():
     a = 1
-    b = 20
+    b = 200#max range must be < or = to loadDAG limit
     return random.randint(a, b)
 
 def checkDirection(data, kind):
@@ -64,7 +64,7 @@ def loadDAG(limit):
         addEdge(newX, newY, dag.i,  newData)
         print(dag.dictionary)
         
-loadDAG(5)
+loadDAG(200)#loadDAG limit must be > or = max rng
 
 
 
