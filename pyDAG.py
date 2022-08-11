@@ -17,6 +17,9 @@ class DAG:
     dictionary = { i : array }
 
 dag = DAG()
+xArray = []
+yArray = []
+dataArray = []
 
 def addEdge(x, y, i, data):
     dag.x = x
@@ -30,26 +33,31 @@ def addEdge(x, y, i, data):
     dag.dictionary = { dag.i : dag.array }
     dag.i = dag.i + 1 
 
-a = 1
-b = 20
-xArray = []
-yArray = []
-dataArray = []
+def rng():
+    a = 1
+    b = 20
+    return random.randint(a, b)
 
 def checkDirection(data, kind):
-    if kind == 'x':
-        for x in xArray:
-            if x == data:
-                data = random.randint(a, b)
+    k = 0
+    while k < 1:
+        if kind == 'x':
+            if data in xArray:
+                data = rng()
             else:
                 break
-        return data
+        elif kind == 'y':
+            if data in yArray:
+                data = rng()
+            else:
+                break
+    return data
 
 def loadDAG(limit):
     for i in range(limit):
-        newX = checkDirection(random.randint(a, b), 'x')
-        newY = random.randint(a, b)
-        newData = random.randint(a, b)
+        newX = checkDirection(rng(), 'x')
+        newY = checkDirection(rng(), 'y')
+        newData = rng()
         xArray.append(newX)
         yArray.append(newY)
         dataArray.append(newData)
