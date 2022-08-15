@@ -7,6 +7,10 @@
 #print(array)
 #dictionary = { 1: array  }
 #print(dictionary)
+#localint = ord('7') + ord('3') + ord('2')
+#print(localint)
+#bytes_val = localint.to_bytes(2, 'little')
+#print(bytes_val)
 import random
 class DAG:
     i = 0
@@ -33,7 +37,7 @@ def addEdge(x, y, i, data):
     dag.i = dag.i + 1 
 
 def rng():
-    maxRange = 4
+    maxRange = 16
     return random.randint(1, maxRange)
 
 def checkDirection(dataX, dataY):
@@ -47,6 +51,40 @@ def checkDirection(dataX, dataY):
             break
     return dataX, dataY
 
+def findNumActive(num, arg):
+    found = False;
+    def checkAll():
+        if num == dag.array[0] or num == dag.array[1] or num == dag.array[2]:
+           found = True
+        else:
+            found = False
+        return found
+    def checkX():
+        if num == dag.array[0]:
+            found = True
+        else:
+            found = False
+        return found
+    def checkY():
+        if num == dag.array[1]:
+            found = True
+        else:
+            found = False
+        return found
+    def checkData():
+        if num == dag.array[2]:
+            found = True
+        else:
+            found = False
+        return found
+    switcher = {
+            'all': checkAll(),
+            'x': checkX(),
+            'y': checkY(),
+            'data': checkData()
+    }
+    return switcher.get(arg)
+
 def loadDAG(limit):
     for i in range(limit):
         newX = rng()
@@ -57,10 +95,11 @@ def loadDAG(limit):
         xyArray.append(location)
         dataArray.append(newData)
         addEdge(newX, newY, dag.i,  newData)
-        print(dag.dictionary[i])
+        found = False
+        found  = findNumActive(7, 'y')
+        print(dag.dictionary[i+1], found)
         
-loadDAG(16) # load limit can be 4x the max range of the rng
-
+loadDAG(64) # load limit can be 4x the max range of the rng
 
 
 
